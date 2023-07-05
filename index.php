@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,15 +25,21 @@
             <div class="row">
                 <div class="col-12 bg-light rounded p-3 d-flex flex-row flex-wrap">
                     <div class="col-6">
-                    <h5>Numero di caratteri</h5>
+                        <label for="length">Lunghezza Password</label>
                     </div>
                     <div class="col-6">
-                    <form action="index.php" method="post">
-                        <input type="text" name="" id="" class="w-100">
-                    </form>
+                        <form action="generatePassword.php" method="get">
+                            <input type="number" name="length" id="length" class="w-50" min="8" max="27">
+                            <button type="submit" class="btn btn-primary" value="Generate Password">Invia</button>
+                        </form>
                     </div>
                     <div class="col-12 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mt-4">Invia</button>
+                        <?php
+                        if (isset($_SESSION['generatedPassword'])) {
+                            echo "<h2 class=' mt-4'>{$_SESSION['generatedPassword']}</h2>";
+                            unset($_SESSION['generatedPassword']);
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
